@@ -1,13 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactBootstrapSlider from 'react-bootstrap-slider';
+import ReactBootstrapSlider from'react-bootstrap-slider';
 import { observer } from "mobx-react";
 import AutographaStore from "./AutographaStore";
 import { FormattedMessage } from 'react-intl';
-const Constant = require("../util/constants");
 const refDb = require(`${__dirname}/../util/data-provider`).referenceDb();
-
-
 
 @observer
 class Footer extends React.Component {
@@ -20,6 +16,12 @@ class Footer extends React.Component {
     }
 
     handleChange(key) {
+        let translationContent = [];
+        for(let i=0; i<AutographaStore.chunkGroup.length; i++){
+            let vId = 'v' + (i + 1);
+            translationContent.push(document.getElementById(vId).textContent.toString());
+        }
+        AutographaStore.translationContent = translationContent;
         AutographaStore.layout = key;
         AutographaStore.layoutContent = key;
         AutographaStore.aId = key;
